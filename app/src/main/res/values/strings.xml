@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Sys Mon Companion</string>
+    <string name="pc_name">PC: %s</string>
+    <string name="cpu_name">CPU: %s</string>
+    <string name="clock">Clock: %s Mhz</string>
+    <string name="cpu_temp_val">Temp: %s °C</string>
+    <string name="cpu_temp_max">Temp Max: %s °C</string>
+    <string name="load">Load: %s Percent</string>
+    <string name="gpu_name">GPU: %s</string>
+    <string name="ram_total">RAM: %s Gb</string>
+    <string name="free_ram">Free: %s Gb</string>
+    <string name="used_ram">Used: %s Gb</string>
+</resources>
