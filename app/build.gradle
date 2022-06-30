@@ -54,11 +54,12 @@ dependencies {
     implementation "org.apache.commons:commons-lang3:$apache_version"
     implementation "org.apache.commons:commons-lang3:$apache_version"
 
+    kapt "com.android.databinding:compiler:4.2.2"
 
     //Dagger Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation project(path: ':roundedprogressbar')
+//    implementation project(path: ':roundedprogressbar')
 //    implementation project(path: ':signalr-client-sdk')
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
 
@@ -95,12 +96,13 @@ dependencies {
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
     //Signal R
-//    implementation "com.smartarmenia:dotnetcoresignalrclientjava:$signalR_version"
+    implementation "com.microsoft.signalr:signalr:$signalR_version"
 
-//    implementation 'com.microsoft.signalr:signalr:1.0.0'
-    implementation 'com.microsoft.signalr:signalr:6.0.6'
+    implementation "org.slf4j:slf4j-jdk14:$slj4_version"
 
-    implementation 'org.slf4j:slf4j-jdk14:1.7.25'
+    implementation "com.github.lzyzsd:circleprogress:+"
+
+    implementation "com.github.MackHartley:RoundedProgressBar:$roundedprogress_Version"
 
     testImplementation "junit:junit:4.13.2"
     androidTestImplementation "androidx.test.ext:junit:1.1.3"

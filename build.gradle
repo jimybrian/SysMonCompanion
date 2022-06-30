@@ -46,5 +46,8 @@ ext {
     work_version = "2.7.1"
     retrofit_version = '2.6.0'
     retrofit_interceptor_version = '3.12.1'
-    signalR_version = "1.14"
+    signalR_version = "6.0.6"
+    slj4_version = "1.7.25"
+    arcprogress_version = "1.2.4"
+    roundedprogress_Version = "3.0.0"
 }

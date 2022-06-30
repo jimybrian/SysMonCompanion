@@ -3,6 +3,8 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
+        maven { url 'https://jitpack.io' }
+        jcenter()
     }
 }
 dependencyResolutionManagement {
@@ -10,10 +12,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://jitpack.io' }
+        jcenter()
     }
 }
 rootProject.name = "Sys Mon Companion"
 include ':app'
-//include ':signalr-client-sdk'
-//include ':Acr'
-include ':roundedprogressbar'
+//include ':roundedprogressbar'

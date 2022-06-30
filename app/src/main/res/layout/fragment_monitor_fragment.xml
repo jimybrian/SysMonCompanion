@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.dzworks.sysmoncompanion.ui.MonitorViewModel" />
@@ -18,15 +19,79 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardUrl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/cardCpuData"
-                android:layout_marginTop="@dimen/margin_medium"
                 android:layout_marginStart="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_medium"
                 android:layout_marginEnd="@dimen/margin_medium"
-                app:layout_constraintTop_toTopOf="parent"
+                app:cardCornerRadius="8dp"
                 app:cardElevation="2dp"
-                app:cardCornerRadius="8dp">
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_margin="@dimen/margin_small"
+                        android:id="@+id/tiURL"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:hintEnabled="true"
+                        app:layout_constraintEnd_toStartOf="@id/btnSave"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:hint="@string/url">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etURL"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textUri" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <Button
+                        android:id="@+id/btnSave"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="@id/tiURL"
+                        app:layout_constraintBottom_toBottomOf="@id/tiURL"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tiURL"
+                        android:layout_margin="@dimen/margin_small"
+                        android:text="@string/save" />
+
+                    <Button
+                        android:id="@+id/btnConnect"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/tiURL"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_margin="@dimen/margin_small"
+                        android:text="@string/connect" />
+
+
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardCpuData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginEnd="@dimen/margin_medium"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp"
+                app:layout_constraintTop_toBottomOf="@id/cardUrl">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -38,11 +103,11 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/margin_small"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:textAppearance="?textAppearanceHeadline4"
                         android:text="@{@string/pc_name(viewModel.sysInfo.pcName)}"
+                        android:textAppearance="?textAppearanceHeadline4"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
                         tools:text="@string/pc_name" />
 
                     <TextView
@@ -51,11 +116,11 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/margin_small"
-                        app:layout_constraintTop_toBottomOf="@id/tvPCName"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:textAppearance="?textAppearanceHeadline5"
                         android:text="@{@string/cpu_name(viewModel.sysInfo.cpuName)}"
+                        android:textAppearance="?textAppearanceHeadline5"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvPCName"
                         tools:text="@string/cpu_name" />
 
                     <TextView
@@ -64,82 +129,76 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/margin_small"
-                        android:textAppearance="?textAppearanceBody1"
-                        app:layout_constraintTop_toBottomOf="@id/tvCPUName"
-                        app:layout_constraintStart_toStartOf="parent"
                         android:text="@{@string/clock(viewModel.sysInfo.cpuClock)}"
+                        android:textAppearance="?textAppearanceBody1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvCPUName"
                         tools:text="@string/clock" />
 
-                    <TextView
-                        android:id="@+id/tvCPUTempVal"
-                        style="@style/textMediumDark"
-                        android:layout_width="0dp"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/csCPUGauges"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/margin_small"
-                        android:textAppearance="?textAppearanceBody1"
-                        app:layout_constraintTop_toBottomOf="@id/tvCPUClock"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/tvCPUTempMax"
-                        android:text="@{@string/cpu_temp_val(viewModel.sysInfo.cpuTempVal)}"
-                        tools:text="@string/cpu_temp_val" />
-
-                    <TextView
-                        android:id="@+id/tvCPUTempMax"
-                        style="@style/textMediumDark"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_small"
-                        android:textAppearance="?textAppearanceBody1"
-                        app:layout_constraintTop_toBottomOf="@id/tvCPUClock"
-                        app:layout_constraintStart_toEndOf="@id/tvCPUTempVal"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:text="@{@string/cpu_temp_max(viewModel.sysInfo.cpuTempMax)}"
-                        tools:text="@string/cpu_temp_max" />
-
-                    <TextView
-                        android:id="@+id/tvCPUUSage"
-                        style="@style/textMediumDark"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_small"
-                        android:textAppearance="?textAppearanceBody1"
-                        app:layout_constraintTop_toBottomOf="@id/tvCPUTempVal"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/barCPUUsage"
-                        app:layout_constraintBottom_toBottomOf="@id/barCPUUsage"
-                        android:text="@{@string/load(viewModel.sysInfo.cpuUsageVal)}"
-                        tools:text="@string/load" />
-
-                    <com.mackhartley.roundedprogressbar.RoundedProgressBar
-                        app:layout_constraintTop_toBottomOf="@id/tvCPUTempVal"
-                        app:layout_constraintStart_toEndOf="@id/tvCPUUSage"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_margin="@dimen/margin_small"
-                        android:id="@+id/barCPUUsage"
-                        android:layout_width="0dp"
-                        android:layout_height="48dp"
-                        app:rpbBackgroundColor="#F28969"
-                        app:rpbBackgroundTextColor="#070600"
-                        app:rpbCornerRadius="6dp"
-                        app:rpbProgressColor="#070600"
-                        app:rpbProgressTextColor="#F28969"
-                        app:rpbTextPadding="12dp" />
+                        app:layout_constraintTop_toBottomOf="@id/tvCPUClock">
+
+                        <com.github.lzyzsd.circleprogress.ArcProgress
+                            android:id="@+id/arcCPUUsage"
+                            android:layout_width="0dp"
+                            android:layout_height="160dp"
+                            android:layout_margin="@dimen/margin_small"
+                            app:arc_bottom_text="@string/usage_load"
+                            app:arc_bottom_text_size="16dp"
+                            app:arc_finished_color="?colorError"
+                            app:arc_max="100"
+                            app:arc_progress="55"
+                            app:arc_stroke_width="16dp"
+                            app:arc_suffix_text="@string/usage_load_suffix"
+                            app:arc_suffix_text_size="18dp"
+                            app:arc_text_color="?colorOnSurface"
+                            app:arc_unfinished_color="@color/colorAccentAlt"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/arcCPUTemp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.github.lzyzsd.circleprogress.ArcProgress
+                            android:id="@+id/arcCPUTemp"
+                            android:layout_width="0dp"
+                            android:layout_height="160dp"
+                            android:layout_margin="@dimen/margin_small"
+                            app:arc_bottom_text="@string/temp"
+                            app:arc_bottom_text_size="16dp"
+                            app:arc_finished_color="?colorError"
+                            app:arc_max="110"
+                            app:arc_progress="55"
+                            app:arc_stroke_width="16dp"
+                            app:arc_suffix_text="@string/temp_suffix"
+                            app:arc_suffix_text_size="24dp"
+                            app:arc_text_color="?colorOnSurface"
+                            app:arc_unfinished_color="@color/colorAccentAlt"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/arcCPUUsage"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardGPUData"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/cardGPUData"
-                android:layout_marginTop="@dimen/margin_medium"
                 android:layout_marginStart="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_medium"
                 android:layout_marginEnd="@dimen/margin_medium"
-                app:layout_constraintTop_toBottomOf="@id/cardCpuData"
+                app:cardCornerRadius="8dp"
                 app:cardElevation="2dp"
-                app:cardCornerRadius="8dp">
+                app:layout_constraintTop_toBottomOf="@id/cardCpuData">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -151,85 +210,79 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/margin_small"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:textAppearance="?textAppearanceHeadline5"
                         android:text="@{@string/gpu_name(viewModel.sysInfo.gpuName)}"
+                        android:textAppearance="?textAppearanceHeadline5"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
                         tools:text="@string/gpu_name" />
 
-                    <TextView
-                        android:id="@+id/tvGPUTempVal"
-                        style="@style/textMediumDark"
-                        android:layout_width="0dp"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/csGPUGauges"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/margin_small"
-                        android:textAppearance="?textAppearanceBody1"
-                        app:layout_constraintTop_toBottomOf="@id/tvGPUName"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/tvGPUTempMax"
-                        android:text="@{@string/cpu_temp_val(viewModel.sysInfo.gpuTempVal)}"
-                        tools:text="@string/cpu_temp_val" />
-
-                    <TextView
-                        android:id="@+id/tvGPUTempMax"
-                        style="@style/textMediumDark"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_small"
-                        android:textAppearance="?textAppearanceBody1"
-                        app:layout_constraintTop_toBottomOf="@id/tvGPUName"
-                        app:layout_constraintStart_toEndOf="@id/tvGPUTempVal"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:text="@{@string/cpu_temp_val(viewModel.sysInfo.gpuTempVal)}"
-                        tools:text="@string/cpu_temp_max" />
-
-                    <TextView
-                        android:id="@+id/tvGPUUSage"
-                        style="@style/textMediumDark"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_small"
-                        android:textAppearance="?textAppearanceBody1"
-                        app:layout_constraintTop_toBottomOf="@id/tvGPUTempVal"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/barGPUUsage"
-                        app:layout_constraintBottom_toBottomOf="@id/barGPUUsage"
-                        android:text="@{@string/load(viewModel.sysInfo.gpuUsageVal)}"
-                        tools:text="@string/load" />
-
-                    <com.mackhartley.roundedprogressbar.RoundedProgressBar
-                        app:layout_constraintTop_toBottomOf="@id/tvGPUTempVal"
-                        app:layout_constraintStart_toEndOf="@id/tvGPUUSage"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_margin="@dimen/margin_small"
-                        android:id="@+id/barGPUUsage"
-                        android:layout_width="0dp"
-                        android:layout_height="48dp"
-                        app:rpbBackgroundColor="#F28969"
-                        app:rpbBackgroundTextColor="#070600"
-                        app:rpbCornerRadius="6dp"
-                        app:rpbProgressColor="#070600"
-                        app:rpbProgressTextColor="#F28969"
-                        app:rpbTextPadding="12dp" />
+                        app:layout_constraintTop_toBottomOf="@id/tvGPUName">
+
+                        <com.github.lzyzsd.circleprogress.ArcProgress
+                            android:id="@+id/arcGPUUsage"
+                            android:layout_width="0dp"
+                            android:layout_height="160dp"
+                            android:layout_margin="@dimen/margin_small"
+                            app:arc_bottom_text="@string/usage_load"
+                            app:arc_bottom_text_size="16dp"
+                            app:arc_finished_color="?colorError"
+                            app:arc_max="100"
+                            app:arc_progress="55"
+                            app:arc_stroke_width="16dp"
+                            app:arc_suffix_text="@string/usage_load_suffix"
+                            app:arc_suffix_text_size="18dp"
+                            app:arc_text_color="?colorOnSurface"
+                            app:arc_unfinished_color="@color/colorAccentAlt"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/arcGPUTemp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.github.lzyzsd.circleprogress.ArcProgress
+                            android:id="@+id/arcGPUTemp"
+                            android:layout_width="0dp"
+                            android:layout_height="160dp"
+                            android:layout_margin="@dimen/margin_small"
+                            app:arc_bottom_text="@string/temp"
+                            app:arc_bottom_text_size="16dp"
+                            app:arc_finished_color="?colorError"
+                            app:arc_max="110"
+                            app:arc_progress="55"
+                            app:arc_stroke_width="16dp"
+                            app:arc_suffix_text="@string/temp_suffix"
+                            app:arc_suffix_text_size="24dp"
+                            app:arc_text_color="?colorOnSurface"
+                            app:arc_unfinished_color="@color/colorAccentAlt"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/arcGPUUsage"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardRAMData"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/cardRAMData"
-                android:layout_marginTop="@dimen/margin_medium"
                 android:layout_marginStart="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_medium"
                 android:layout_marginEnd="@dimen/margin_medium"
-                app:layout_constraintTop_toBottomOf="@id/cardGPUData"
-                app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginBottom="@dimen/margin_small"
+                app:cardCornerRadius="8dp"
                 app:cardElevation="2dp"
-                app:cardCornerRadius="8dp">
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardGPUData">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -241,11 +294,11 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/margin_small"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:textAppearance="?textAppearanceHeadline5"
                         android:text="@{@string/ram_total(viewModel.sysInfo.ramTotal)}"
+                        android:textAppearance="?textAppearanceHeadline5"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
                         tools:text="@string/ram_total" />
 
                     <TextView
@@ -254,11 +307,11 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/margin_small"
-                        android:textAppearance="?textAppearanceBody1"
-                        app:layout_constraintTop_toBottomOf="@id/tvRAMData"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/tvRAMUsedVal"
                         android:text="@{@string/free_ram(viewModel.sysInfo.ramFree)}"
+                        android:textAppearance="?textAppearanceHeadline5"
+                        app:layout_constraintEnd_toStartOf="@id/tvRAMUsedVal"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvRAMData"
                         tools:text="@string/free_ram" />
 
                     <TextView
@@ -267,11 +320,11 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/margin_small"
-                        android:textAppearance="?textAppearanceBody1"
-                        app:layout_constraintTop_toBottomOf="@id/tvRAMData"
-                        app:layout_constraintStart_toEndOf="@id/tvRamFreeVal"
-                        app:layout_constraintEnd_toEndOf="parent"
                         android:text="@{@string/used_ram(viewModel.sysInfo.ramUsage)}"
+                        android:textAppearance="?textAppearanceHeadline5"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tvRamFreeVal"
+                        app:layout_constraintTop_toBottomOf="@id/tvRAMData"
                         tools:text="@string/used_ram" />
 
                     <TextView
@@ -280,23 +333,21 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/margin_small"
-                        android:textAppearance="?textAppearanceBody1"
-                        app:layout_constraintTop_toBottomOf="@id/tvRamFreeVal"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/barRAMLoad"
-                        app:layout_constraintBottom_toBottomOf="@id/barRAMLoad"
                         android:text="@{@string/load(viewModel.sysInfo.ramLoad)}"
+                        android:textAppearance="?textAppearanceHeadline5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvRamFreeVal"
                         tools:text="@string/load" />
 
                     <com.mackhartley.roundedprogressbar.RoundedProgressBar
-                        app:layout_constraintTop_toBottomOf="@id/tvRamFreeVal"
-                        app:layout_constraintStart_toEndOf="@id/tvRAMLoad"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_margin="@dimen/margin_small"
                         android:id="@+id/barRAMLoad"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
+                        android:layout_margin="@dimen/margin_small"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvRAMLoad"
                         app:rpbBackgroundColor="#F28969"
                         app:rpbBackgroundTextColor="#070600"
                         app:rpbCornerRadius="6dp"

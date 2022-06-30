@@ -53,18 +53,18 @@ class MonitorFragment : Fragment() {
     }
 
     private fun setupListeners(){
-        viewModel.sysInfo.observe(viewLifecycleOwner, Observer { data ->
-            if(data != null){
-                val cpuUsage = data.cpuUsageVal?.toDouble()
-                val gpuUsage = data.gpuUsageVal?.toDouble()
-                val ramUsage = data.ramLoad?.toDouble()
+        viewModel.sysInfo.observe(viewLifecycleOwner) { data ->
+            if (data != null) {
+                binding.arcCPUTemp.progress = data.cpuTempVal?.toInt() ?: 0
+                binding.arcCPUUsage.progress = data.cpuUsageVal?.toInt() ?: 0
 
-                binding.barCPUUsage.setProgressPercentage(cpuUsage ?: 0.0, true)
-                binding.barGPUUsage.setProgressPercentage(gpuUsage ?: 0.0, true)
-                binding.barRAMLoad.setProgressPercentage(ramUsage ?: 0.0, true)
+                binding.arcGPUTemp.progress = data.gpuTempVal?.toInt() ?: 0
+                binding.arcGPUUsage.progress = data.gpuUsageVal?.toInt() ?: 0
+
+                binding.barRAMLoad.setProgressPercentage(data.ramLoad?.toDouble() ?: 0.0, true)
 
             }
-        })
+        }
     }
 
 }

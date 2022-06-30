@@ -10,4 +10,11 @@
     <string name="ram_total">RAM: %s Gb</string>
     <string name="free_ram">Free: %s Gb</string>
     <string name="used_ram">Used: %s Gb</string>
+    <string name="temp">Temp</string>
+    <string name="temp_suffix">°</string>
+    <string name="usage_load">Usage</string>
+    <string name="usage_load_suffix">\%</string>
+    <string name="save">Save</string>
+    <string name="connect">Connect</string>
+    <string name="url">Url</string>
 </resources>

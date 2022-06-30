@@ -1,58 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="md_theme_light_primary">#156E00</color>
-    <color name="md_theme_light_onPrimary">#FFFFFF</color>
-    <color name="md_theme_light_primaryContainer">#8BFC64</color>
-    <color name="md_theme_light_onPrimaryContainer">#022100</color>
-    <color name="md_theme_light_secondary">#156E00</color>
-    <color name="md_theme_light_onSecondary">#FFFFFF</color>
-    <color name="md_theme_light_secondaryContainer">#92FB6D</color>
-    <color name="md_theme_light_onSecondaryContainer">#0A2004</color>
-    <color name="md_theme_light_tertiary">#7D5700</color>
-    <color name="md_theme_light_onTertiary">#FFFFFF</color>
-    <color name="md_theme_light_tertiaryContainer">#FFDEA5</color>
-    <color name="md_theme_light_onTertiaryContainer">#281900</color>
-    <color name="md_theme_light_error">#B3261E</color>
-    <color name="md_theme_light_errorContainer">#F9DEDC</color>
-    <color name="md_theme_light_onError">#FFFFFF</color>
-    <color name="md_theme_light_onErrorContainer">#410E0B</color>
-    <color name="md_theme_light_background">#FBFDFD</color>
-    <color name="md_theme_light_onBackground">#191C1D</color>
-    <color name="md_theme_light_surface">#FBFDFD</color>
-    <color name="md_theme_light_onSurface">#191C1D</color>
-    <color name="md_theme_light_surfaceVariant">#E7E0EC</color>
-    <color name="md_theme_light_onSurfaceVariant">#49454F</color>
-    <color name="md_theme_light_outline">#79747E</color>
-    <color name="md_theme_light_inverseOnSurface">#EFF1F1</color>
-    <color name="md_theme_light_inverseSurface">#2D3132</color>
-    <color name="md_theme_light_inversePrimary">#70DF4B</color>
-    <color name="md_theme_light_shadow">#000000</color>
-    <color name="md_theme_light_primaryInverse">#70DF4B</color>
-    <color name="md_theme_dark_primary">#70DF4B</color>
-    <color name="md_theme_dark_onPrimary">#053900</color>
-    <color name="md_theme_dark_primaryContainer">#0D5300</color>
-    <color name="md_theme_dark_onPrimaryContainer">#8BFC64</color>
-    <color name="md_theme_dark_secondary">#77DE54</color>
-    <color name="md_theme_dark_onSecondary">#053900</color>
-    <color name="md_theme_dark_secondaryContainer">#0D5300</color>
-    <color name="md_theme_dark_onSecondaryContainer">#92FB6D</color>
-    <color name="md_theme_dark_tertiary">#FFBA15</color>
-    <color name="md_theme_dark_onTertiary">#422C00</color>
-    <color name="md_theme_dark_tertiaryContainer">#5F4100</color>
-    <color name="md_theme_dark_onTertiaryContainer">#FFDEA5</color>
-    <color name="md_theme_dark_error">#F2B8B5</color>
-    <color name="md_theme_dark_errorContainer">#8C1D18</color>
-    <color name="md_theme_dark_onError">#601410</color>
-    <color name="md_theme_dark_onErrorContainer">#F9DEDC</color>
-    <color name="md_theme_dark_background">#191C1D</color>
-    <color name="md_theme_dark_onBackground">#E0E3E3</color>
-    <color name="md_theme_dark_surface">#191C1D</color>
-    <color name="md_theme_dark_onSurface">#E0E3E3</color>
-    <color name="md_theme_dark_surfaceVariant">#49454F</color>
-    <color name="md_theme_dark_onSurfaceVariant">#CAC4D0</color>
-    <color name="md_theme_dark_outline">#938F99</color>
-    <color name="md_theme_dark_inverseOnSurface">#191C1D</color>
-    <color name="md_theme_dark_inverseSurface">#E0E3E3</color>
-    <color name="md_theme_dark_inversePrimary">#156E00</color>
-    <color name="md_theme_dark_shadow">#000000</color>
-    <color name="md_theme_dark_primaryInverse">#156E00</color>
+    <color name="colorPrimary">#673AB7</color>
+    <color name="colorPrimaryDark">#512DA8</color>
+    <color name="colorAccent">#FFC107</color>
+    <color name="colorAccentAlt">@color/material_yellow_800</color>
+
+    <color name="background">#F5F5F5</color>
+
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="body_text_1">#DE000000</color>
+    <color name="body_text_2">#8a000000</color>
+    <color name="body_text_3">#60000000</color>
+
+    <color name="facebook_blue">#3B5998</color>
+    <color name="google_red">#db3236</color>
+
+    <color name="black_alpha">#2000</color>
+    <color name="white_70">#B3FFFFFF</color>
+
+    <color name="emp_empty_background">@color/background</color>
+    <color name="emp_empty_button_text">@color/body_text_1</color>
+    <color name="emp_empty_button_background">@android:color/transparent</color>
+    <color name="emp_empty_drawable">@color/body_text_3</color>
+    <color name="emp_error_background">@color/background</color>
+    <color name="emp_error_button_text">@color/body_text_1</color>
+    <color name="emp_error_drawable">@color/body_text_3</color>
+    <color name="emp_error_text">@color/body_text_2</color>
+    <color name="emp_error_title">@color/body_text_1</color>
+    <color name="emp_empty_text">@color/body_text_2</color>
+    <color name="emp_empty_title">@color/body_text_1</color>
+
+    <!-- Greyscales -->
+    <color name="grey200">#EEEEEE</color>
+    <color name="white_alpha">#B3FFFFFF</color>
+
+    <color name="colorPrimaryText">#212121</color>
+    <color name="colorSecondaryText">#757575</color>
+
+    <color name="text_color_focus">@color/colorPrimaryText</color>
+    <color name="text_color_less_focus">@color/colorSecondaryText</color>
+    <color name="text_color_least_focus">@color/material_grey_600</color>
+    <color name="text_color_focus_inverse">@color/white</color>
+    <color name="text_color_less_focus_inverse">@color/white_alpha</color>
+
+    <color name="empty_button_text_color">@color/colorPrimaryDark</color>
+    <color name="empty_drawable_tint">@color/colorAccentAlt</color>
+    <color name="err_background_color">@color/material_red_500</color>
+    <color name="err_button_text_color">@color/white</color>
+    <color name="err_drawable_tint">@color/white</color>
+    <color name="err_text_color">@color/white</color>
+    <color name="err_title_text_color">@color/white</color>
+    <color name="loading_drawable_tint">@color/colorAccentAlt</color>
+    <color name="empty_title_text">@color/text_color_focus</color>
+    <color name="empty_text">@color/text_color_less_focus</color>
+
 </resources>
