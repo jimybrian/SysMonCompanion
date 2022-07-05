@@ -9,8 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.dzworks.sysmoncompanion.R
+import com.dzworks.sysmoncompanion.connections.AppPreferences
 import com.dzworks.sysmoncompanion.databinding.FragmentMonitorFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MonitorFragment : Fragment() {
@@ -18,6 +20,9 @@ class MonitorFragment : Fragment() {
     lateinit var binding: FragmentMonitorFragmentBinding
 
     val viewModel: MonitorViewModel by viewModels()
+
+    @Inject
+    lateinit var appPreferences: AppPreferences
 
 
     override fun onCreateView(
@@ -27,6 +32,15 @@ class MonitorFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil
             .inflate(inflater, R.layout.fragment_monitor_fragment, container, false)
+
+        binding.btnConnect.setOnClickListener {
+            viewModel.connectToHub()
+        }
+
+        binding.btnSave.setOnClickListener {
+            if(!viewModel.savedUrl.value.isNullOrEmpty())
+                appPreferences.url = viewModel.savedUrl.value
+        }
 
         return binding.root
     }
@@ -63,6 +77,25 @@ class MonitorFragment : Fragment() {
 
                 binding.barRAMLoad.setProgressPercentage(data.ramLoad?.toDouble() ?: 0.0, true)
 
+            }
+        }
+
+        viewModel.isConnectedLiveData.observe(viewLifecycleOwner) { connectionState ->
+            when{
+                connectionState -> {
+                    binding.cardCpuData.visibility = View.VISIBLE
+                    binding.cardGPUData.visibility = View.VISIBLE
+                    binding.cardRAMData.visibility = View.VISIBLE
+
+                    binding.btnConnect.text = "Disconnect"
+                }
+                else -> {
+                    binding.cardCpuData.visibility = View.GONE
+                    binding.cardGPUData.visibility = View.GONE
+                    binding.cardRAMData.visibility = View.GONE
+
+                    binding.btnConnect.text = "Connect"
+                }
             }
         }
     }

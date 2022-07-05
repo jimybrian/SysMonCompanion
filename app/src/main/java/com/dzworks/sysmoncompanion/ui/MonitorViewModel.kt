@@ -2,9 +2,11 @@ package com.dzworks.sysmoncompanion.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.dzworks.sysmoncompanion.connections.AppPreferences
 import com.dzworks.sysmoncompanion.connections.SystemInfo
+import com.microsoft.signalr.Action
 import com.microsoft.signalr.Action1
 import com.microsoft.signalr.HubConnection
 import com.microsoft.signalr.HubConnectionBuilder
@@ -13,6 +15,8 @@ import com.microsoft.signalr.HubConnectionBuilder
 //import com.smartarmenia.dotnetcoresignalrclientjava.HubMessage
 //import com.smartarmenia.dotnetcoresignalrclientjava.WebSocketHubConnectionP2
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.reactivex.rxjava3.core.CompletableObserver
+import io.reactivex.rxjava3.disposables.Disposable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -24,70 +28,7 @@ import javax.inject.Inject
 class MonitorViewModel
     @Inject constructor(private val appPreferences: AppPreferences): ViewModel() {
 
-
-//    lateinit var hubConnection: HubConnection
-//        val hubUrl by lazy { appPreferences.url }
-//    var keepConnAlive = false
-//
-//    var isConnectedLiveData = MutableLiveData<Boolean>()
-//
-//    private val _sysInfo: MutableLiveData<SystemInfo> = MutableLiveData()
-//    val sysInfo: LiveData<SystemInfo> get() = _sysInfo
-//
-//    fun connectToHub() {
-//        try {
-//            hubConnection = WebSocketHubConnectionP2(hubUrl, "")
-//            hubConnection.connect()
-//            hubConnection.addListener(object : HubConnectionListener {
-//                override fun onConnected() {
-//                    isConnectedLiveData.postValue(true)
-//                }
-//
-//                override fun onMessage(message: HubMessage?) {
-//                    Timber.d(message.toString())
-//                }
-//
-//                override fun onDisconnected() {
-//                    isConnectedLiveData.postValue(false)
-//                    when(keepConnAlive){
-//                        true -> connectToHub()
-//                    }
-//                }
-//
-//                override fun onError(exception: Exception?) {
-//                    isConnectedLiveData.postValue(false)
-//                }
-//            })
-//        }
-//        catch (e:Exception){
-//            Timber.d(e)
-//        }
-//    }
-//
-//    fun disconnectFromHub(){
-//        try{
-//            when {
-//                isConnectedLiveData.value != null -> if (isConnectedLiveData.value!!) {
-//                    hubConnection.disconnect()
-//                }
-//            }
-//        }catch (e:Exception){
-//
-//        }
-//    }
-//
-//    override fun onCleared() {
-//        super.onCleared()
-//        try{
-//            when {
-//                isConnectedLiveData.value != null -> if (isConnectedLiveData.value!!) {
-//                    hubConnection.disconnect()
-//                }
-//            }
-//        }catch (e:Exception){
-//
-//        }
-//    }
+    var savedUrl: MutableLiveData<String> = MutableLiveData()
 
     var isConnectedLiveData = MutableLiveData<Boolean>()
 
@@ -102,6 +43,10 @@ class MonitorViewModel
 
     val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
+    init {
+        savedUrl.postValue(hubUrl)
+    }
+
 
     fun connectToHub() {
         uiScope.launch {
@@ -110,9 +55,19 @@ class MonitorViewModel
 
                 setupHubProxy()
 
-                var startState = hubConnection?.start()
+                val connectionComplete = hubConnection?.start()
 
-                isConnectedLiveData.value = true
+                connectionComplete?.subscribeWith(object: CompletableObserver {
+                    override fun onSubscribe(d: Disposable) = Unit
+
+                    override fun onComplete() {
+                        isConnectedLiveData.postValue(true)
+                    }
+
+                    override fun onError(e: Throwable) {
+                        Timber.d(e)
+                    }
+                })
 
                 Timber.d(hubConnection?.connectionState?.toString())
 
@@ -129,6 +84,7 @@ class MonitorViewModel
     fun disconnectFromHub(){
         uiScope.launch {
             hubConnection?.stop()
+            isConnectedLiveData.value = false
         }
     }
 

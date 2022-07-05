@@ -49,6 +49,7 @@
                             android:id="@+id/etURL"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:text="@={viewModel.savedUrl}"
                             android:inputType="textUri" />
 
                     </com.google.android.material.textfield.TextInputLayout>
