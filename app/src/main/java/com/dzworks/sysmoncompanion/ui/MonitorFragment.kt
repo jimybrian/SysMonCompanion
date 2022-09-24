@@ -1,18 +1,25 @@
 package com.dzworks.sysmoncompanion.ui
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.dzworks.sysmoncompanion.R
 import com.dzworks.sysmoncompanion.connections.AppPreferences
 import com.dzworks.sysmoncompanion.databinding.FragmentMonitorFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.net.Inet4Address
+import java.net.InetAddress
+import java.net.NetworkInterface
+import java.net.SocketException
+import java.util.*
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class MonitorFragment : Fragment() {
@@ -42,7 +49,43 @@ class MonitorFragment : Fragment() {
                 appPreferences.url = viewModel.savedUrl.value
         }
 
+        binding.btnFillAddress.setOnClickListener {
+            val myIpAddress = getIpAddress()
+
+            val dialog =  AlertDialog.Builder(requireContext())
+                .setTitle("Confirm Ip Address")
+                .setMessage("Is your IP Address $myIpAddress")
+                .setPositiveButton("Yes", DialogInterface.OnClickListener { dialogInterface, i ->
+                    dialogInterface.dismiss()
+                    val url = "https://$myIpAddress:82/"
+                })
+                .setNegativeButton("No", DialogInterface.OnClickListener { dialogInterface, i ->
+                    dialogInterface.dismiss()
+                })
+
+            dialog.show()
+        }
+
         return binding.root
+    }
+
+    private fun getIpAddress() : String?{
+        try {
+            val en: Enumeration<NetworkInterface> = NetworkInterface.getNetworkInterfaces()
+            while (en.hasMoreElements()) {
+                val intf: NetworkInterface = en.nextElement()
+                val enumIpAddr: Enumeration<InetAddress> = intf.getInetAddresses()
+                while (enumIpAddr.hasMoreElements()) {
+                    val inetAddress: InetAddress = enumIpAddr.nextElement()
+                    if (!inetAddress.isLoopbackAddress && inetAddress is Inet4Address) {
+                        return inetAddress.getHostAddress()
+                    }
+                }
+            }
+        } catch (ex: SocketException) {
+            ex.printStackTrace()
+        }
+        return null
     }
 
 

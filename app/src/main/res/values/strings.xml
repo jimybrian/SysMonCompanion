@@ -17,4 +17,5 @@
     <string name="save">Save</string>
     <string name="connect">Connect</string>
     <string name="url">Url</string>
+    <string name="fill_ip_address">Fill IP Address</string>
 </resources>

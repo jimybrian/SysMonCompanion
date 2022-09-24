@@ -50,4 +50,5 @@ ext {
     slj4_version = "1.7.25"
     arcprogress_version = "1.2.4"
     roundedprogress_Version = "3.0.0"
+    easy_version="3.0.0"
 }
